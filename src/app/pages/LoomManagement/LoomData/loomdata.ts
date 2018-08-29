@@ -1,0 +1,22 @@
+export interface LoomData {
+    Id?
+    LoomDate?
+    ShiftId?
+    LoomId?
+    QualityId?
+    EmployeeId?
+    StartReading?
+    EndReading?
+    MessId?
+    Performance?
+    Production?
+    Remark?
+    Status?
+    MessName?
+    ShiftName?
+    LoomName?
+    QualityName?
+    EmpFirstName?
+    PerformanceName?
+    StatusName?
+    }

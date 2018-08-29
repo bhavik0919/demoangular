@@ -1,0 +1,23 @@
+<div class="container">
+    <form novalidate (ngSubmit)="insertOrUpdateNewQuality(QualityForm)" [formGroup]="QualityForm">
+    <div class="page-header">
+        <h3>{{title}}</h3>
+    </div>
+    </form>
+    <br>
+    <!-- <div class="row">
+        <p-dataTable [value]="rateList" [value]="noteList" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" [paginator]="true">
+            <p-column field="JobType" header="Job Type"></p-column>
+            <p-column field="UnitOfMeasure" header="Unit Of Measure"></p-column>
+            <p-column field="Rate" header="Rate"></p-column>
+            <p-column field="Note" header="Note"></p-column>
+            <p-column field="Note" header="Action">
+                <ng-template let-col let-rate="rowData" pTemplate="body">
+                        <button class="btn btn-warning" (click)="AddEditRateComponent(rate)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                        <button class="btn btn-danger" *ngIf="rate.status == constActiveStatus" (click)="activateOrDeactivateRate(rate,constActiveStatus)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        <button class="btn btn-success" *ngIf="rate.status == constInactiveStatus" (click)="activateOrDeactivateRate(rate,constInactiveStatus)"><i class="fa fa-check" aria-hidden="true"></i></button>
+                </ng-template>
+            </p-column>
+        </p-dataTable>
+    </div> -->
+</div>
