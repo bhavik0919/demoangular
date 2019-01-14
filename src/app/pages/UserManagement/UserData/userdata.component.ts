@@ -1,10 +1,10 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  templateUrl: './loomdata.component.html',
+  templateUrl: './userdata.component.html',
   encapsulation: ViewEncapsulation.None,
 })
 
-export class LoomDataComponent {
+export class UserDataComponent {
   title = 'app';
 }

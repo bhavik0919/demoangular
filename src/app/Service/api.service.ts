@@ -16,10 +16,10 @@ export class APIService {
     baseURL: string = Global.BASE_URL;
     constructor(private _http: Http) { }
 
-    get(url: string, model: any): Observable<any> {
+    get(url: string): Observable<any> {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        headers.append('token',model.token ? model.token : "");
+        headers.append('token',Global.Token);
         let options = new RequestOptions({ headers: headers });
         return this._http.get(this.baseURL + url,options)
             .map((response: Response) => <any>response.json())
@@ -30,7 +30,7 @@ export class APIService {
         //  let body = JSON.stringify(model);
           let headers = new Headers();
           headers.append('Content-Type', 'application/json');
-          headers.append("token",model.token ? model.token : "");
+          headers.append("token",Global.Token);
           let body = JSON.stringify(model);
           let options = new RequestOptions({ headers: headers });
           return this._http.post(this.baseURL + url, body, options)
@@ -41,6 +41,7 @@ export class APIService {
     put(url: string, id: number, model: any): Observable<any> {
         let body = JSON.stringify(model);
         let headers = new Headers({ 'Content-Type': 'application/json' });
+        headers.append("token",Global.Token);
         let options = new RequestOptions({ headers: headers });
         return this._http.put(this.baseURL + url + '/' + id, body, options)
             .map((response: Response) => <any>response.json())
@@ -49,8 +50,9 @@ export class APIService {
 
     delete(url: string, id: string): Observable<any> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
+        headers.append("token",Global.Token);
         let options = new RequestOptions({ headers: headers });
-        return this._http.delete(this.baseURL + url + id, options)
+        return this._http.delete(this.baseURL + url + '/' + id, options)
             .map((response: Response) => <any>response.json())
             .catch(this.handleError);
     }

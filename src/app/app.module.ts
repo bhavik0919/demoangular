@@ -7,13 +7,12 @@ import { RouterModule,Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { APIService } from 'app/service/api.service';
-import { LoomDataModule } from 'app/pages/LoomManagement/LoomData/loomdata.module';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { MultiSelectModule } from 'primeng/primeng';
-import { HeaderComponent } from 'app/pages/LoomManagement/Common/header/header.component';
-import { FooterComponent } from 'app/pages/LoomManagement/Common/footer/footer.component';
-
 import { TableModule } from 'primeng/table';
+import { HeaderComponent } from './pages/UserManagement/Common/header/header.component';
+import { FooterComponent } from './pages/UserManagement/Common/footer/footer.component';
+import { UserDataModule } from './pages/UserManagement/UserData/userdata.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +25,7 @@ import { TableModule } from 'primeng/table';
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
-    LoomDataModule,
+    UserDataModule,
     AppRoutingModule,
     MultiSelectModule,
     TableModule

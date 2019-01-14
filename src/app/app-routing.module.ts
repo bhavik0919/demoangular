@@ -9,7 +9,7 @@ const routes: Routes = [
         children: [
             {
                 path: "dashboard",
-                loadChildren: ".\/pages\/LoomManagement\/LoomData\/loomdata.module#LoomDataModule"
+                loadChildren: ".\/pages\/UserManagement\/UserData\/userdata.module#UserDataModule"
             }
         ]
     }

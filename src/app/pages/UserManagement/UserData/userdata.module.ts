@@ -7,19 +7,20 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { APIService } from '../../../service/api.service';
 import {GrowlModule,DropdownModule, DialogModule,InputSwitchModule,CalendarModule,DataTableModule,SharedModule,PaginatorModule,RatingModule, MultiSelectModule } from 'primeng/primeng';
 import { from } from 'rxjs/observable/from';
+import { TableModule } from 'primeng/table';
 import { MessageService } from 'primeng/components/common/messageservice';
-import { LoomDataComponent } from 'app/pages/LoomManagement/LoomData/loomdata.component';
-import { ViewdataComponent } from 'app/pages/LoomManagement/LoomData/viewdata/viewdata.component';
-import { AddeditComponent } from 'app/pages/LoomManagement/LoomData/addedit/addedit.component';
+import { UserDataComponent } from './userdata.component';
+import { ViewdataComponent } from './viewdata/viewdata.component';
+import { AddeditComponent } from './addedit/addedit.component';
 
 const routes: Routes = [
   {
       path: "",
-      component: LoomDataComponent,
+      component: UserDataComponent,
       children: [
           {
               path: "",
-              component: LoomDataComponent,
+              component: UserDataComponent,
               children: [
                   { path: 'view', component: ViewdataComponent },
                   { path: '', component: ViewdataComponent }
@@ -44,14 +45,15 @@ const routes: Routes = [
     RatingModule,
     GrowlModule,
     MultiSelectModule,
-    DropdownModule
+    DropdownModule,
+    TableModule
   ],
   declarations: [
     DefaultComponent,
     AddeditComponent,
-    LoomDataComponent,
+    UserDataComponent,
     ViewdataComponent
   ],
   providers:[APIService,MessageService]
 })
-export class LoomDataModule { }
+export class UserDataModule { }
