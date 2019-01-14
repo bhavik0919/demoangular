@@ -16,9 +16,12 @@ export class APIService {
     baseURL: string = Global.BASE_URL;
     constructor(private _http: Http) { }
 
-    get(url: string): Observable<any> {
-     
-        return this._http.get(this.baseURL + url)
+    get(url: string, model: any): Observable<any> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('token',model.token ? model.token : "");
+        let options = new RequestOptions({ headers: headers });
+        return this._http.get(this.baseURL + url,options)
             .map((response: Response) => <any>response.json())
             .catch(this.handleError);
     }
@@ -26,8 +29,9 @@ export class APIService {
     post(url: string, model: any): Observable<any> {
         //  let body = JSON.stringify(model);
           let headers = new Headers();
-          headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-          let body = 'data=' + JSON.stringify(model);
+          headers.append('Content-Type', 'application/json');
+          headers.append("token",model.token ? model.token : "");
+          let body = JSON.stringify(model);
           let options = new RequestOptions({ headers: headers });
           return this._http.post(this.baseURL + url, body, options)
               .map((response: Response) => <any>response.json())

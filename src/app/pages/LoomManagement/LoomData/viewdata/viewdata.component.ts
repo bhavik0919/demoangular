@@ -47,21 +47,15 @@ export class ViewdataComponent implements OnInit {
   filetr : {};
   
   // Page title
-  title = Constant.LoomPageTitle;
-  dialogtitle = Constant.AddDialogLoom;
+  title = "Constant.LoomPageTitle";
+  dialogtitle = "Constant.AddDialogLoom";
   cols: any[];
   columnOptions: SelectItem[];
 
   constructor(private api: APIService, public formBuilder: FormBuilder, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
-    this.getLoomList();
-    this.getMeshList();
-    this.getShiftList();
-    this.getPerformenceList();
-    this.getStatusList();
-    this.getLoomDDList();
-    this.getQualityList();
+    this.login();
 
     this.setDefaultValuesForRequestForm();
 
@@ -98,9 +92,26 @@ export class ViewdataComponent implements OnInit {
     return loom;
   }
 
-  getLoomList() {
-    this.api.get('loomdaily/getrows').subscribe(response => {
-      this.looms = response.data;
+  login()
+  {
+    let data = {
+      "username":"test",
+      "password":"testpass"
+    }
+    this.api.post('api/login', data).subscribe(response => {
+      this.Response = response;
+      this.getUserList(response.token)
+    });
+  }
+
+  getUserList(token) {
+    debugger
+    let data = {
+      "token":token,
+    }
+    this.api.get('secureApi/user', data).subscribe(response => {
+      this.Response = response;
+      this.looms = response
     });
   }
 
@@ -122,7 +133,7 @@ export class ViewdataComponent implements OnInit {
   }
 
   showDialogToAdd() {
-    this.dialogtitle = Constant.AddDialogLoom;
+    this.dialogtitle = "Constant.AddDialogLoom";
     this.newLoom = true;
     this.loom = new LoomList();
    
@@ -157,7 +168,6 @@ export class ViewdataComponent implements OnInit {
           this.showError(response.message);
         }
       });
-      this.getLoomList();
       this.loom = null;
       this.displayDialog = false;
     }
@@ -167,28 +177,9 @@ export class ViewdataComponent implements OnInit {
 
   }
 
-  delete() {
-    this.api.get('loomdaily/delete?id=' + this.loom.Id).subscribe(response => {
-      this.Response = response;
-
-      if (response.status == "TRUE") {
-        this.showSuccess(response.message);
-      }
-      else if (response.status == "FALSE") {
-        this.showError(response.message);
-      }
-
-
-    });
-    this.getLoomList();
-
-    this.loom = null;
-    this.displayDialog = false;
-  }
-
   onRowSelect(event) {
     this.newLoom = false;
-    this.dialogtitle = Constant.EditDialogLoom;
+    this.dialogtitle = "Constant.EditDialogLoom";
     this.loom = this.cloneLoom(event.data);
 
     this.LoomForm.patchValue({
@@ -229,45 +220,5 @@ export class ViewdataComponent implements OnInit {
   getDateFormat(){
     return "mm/dd/yy";
   }
-
-  getShiftList() {
-    this.api.get('shift/getrows').subscribe(response => {
-        this.ShiftDropdown =  response.data;
-    });
-  }
-  getLoomDDList() {
-    this.api.get('loom/getrows').subscribe(response => {
-        this.LoomDropdown =  response.data;
-    });
-  }
-
-  getMeshList() {
-    this.api.get('mess/getrows').subscribe(response => {
-      this.MeshDropDown =  response.data;
-    });
-  }
- 
-  getPerformenceList() {
-    this.api.get('loomdaily/getstatus?Type=Performance').subscribe(response => {
-      this.PerformenceDropdown =  response.data;
-    });
-  }
- 
-
-  getStatusList() {
-    this.api.get('loomdaily/getstatus?Type=LoomStatus').subscribe(response => {
-      this.StatusDropdown =  response.data;
-    });
-  }
-
-  getQualityList() {
-    this.api.get('quality/getrows').subscribe(response => {
-      this.QualityDropdown =  response.data;
-    });
-  }
- 
-
-  
-
 }
 
